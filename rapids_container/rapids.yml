@@ -1,0 +1,7 @@
+name: base_env
+channels:
+  - rapidsai
+  - nvidia
+  - conda-forge
+dependencies:
+- rapids=22.02

@@ -1,0 +1,23 @@
+name: base_env
+channels:
+  - conda-forge
+dependencies:
+- cudatoolkit=11.3
+- ipykernel=5.3.4 # required by Python notebooks 5.3.4	
+- ipython=7.22.0  # required by Python notebooks 7.22.0
+- ipywidgets=7.6.3
+- matplotlib=3.4.2
+- numpy=1.20.1  # required by PySpark MLlib  1.20.1
+- pandas=1.2.4  # required by PySpark 1.2.4
+- pip=21.0.1 # 21.0.1
+- python=3.8.10 # 3.8.10 for db 10.3
+- six=1.15.0  # required by PySpark 1.15.0
+- traitlets=5.0.5 # DBR <= 7.3 are not compatible with traitlets 5.0+  - 5.0.5
+- pip:
+  - pyarrow==4.0.0  # required by PySpark 4.0.0
+  - databricks-cli==0.16.2
+  - ipython-genutils==0.2.0
+  - lightgbm==3.3.1
+  - pyodbc==4.0.30
+  - xgboost==1.5.1
+  - mlflow-skinny==1.23.0
