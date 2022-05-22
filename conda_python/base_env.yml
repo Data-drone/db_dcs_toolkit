@@ -3,7 +3,7 @@ channels:
   - conda-forge
 dependencies:
 - cudatoolkit=11.3
-- ipykernel=5.3.4 # required by Python notebooks 5.3.4	
+- ipykernel=5.3.4 # required by Python notebooks 5.3.4
 - ipython=7.22.0  # required by Python notebooks 7.22.0
 - ipywidgets=7.6.3
 - matplotlib=3.4.2

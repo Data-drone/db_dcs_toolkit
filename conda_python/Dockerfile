@@ -1,12 +1,34 @@
 ARG BASE_CONTAINER
 
+FROM ubuntu:20.04 as builder
+
+RUN apt-get update && apt-get install --yes \
+    wget \
+    libdigest-sha-perl \
+    bzip2
+
+RUN wget -q https://repo.continuum.io/miniconda/Miniconda3-py38_4.12.0-Linux-x86_64.sh -O miniconda.sh && \
+    bash miniconda.sh -b -p /databricks/conda && \
+    rm miniconda.sh
+
+
 FROM $BASE_CONTAINER
 
-COPY base_env.yml /tmp/env.yml
+COPY --from=builder /databricks/conda /databricks/conda
 
-RUN conda env create --file /tmp/env.yml && \
-    rm -f /tmp/env.yml && \
-    rm -rf $HOME/.cache/pip/*
+COPY new_env.yml /databricks/.conda-env-def/env.yml
 
-# Set an environment variable used by Databricks to decide which conda environment to activate by default.
-ENV DEFAULT_DATABRICKS_ROOT_CONDA_ENV=base_env
+RUN /databricks/conda/bin/conda env create --file /databricks/.conda-env-def/env.yml \
+    # Source conda.sh for all login shells.
+    && ln -sf /databricks/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh
+
+# Conda recommends using strict channel priority speed up conda operations and reduce package incompatibility problems.
+# Set always_yes to avoid needing -y flags, and improve conda experience in Databricks notebooks.
+RUN /databricks/conda/bin/conda config --system --set channel_priority strict \
+    && /databricks/conda/bin/conda config --system --set always_yes True
+
+# This environment variable must be set to indicate the conda environment to activate.
+# Note that currently, we have to set both of these environment variables. The first one is necessary to indicate that this runtime supports conda.
+# The second one is necessary so that the python notebook/repl can be started (won't work without it)
+ENV DEFAULT_DATABRICKS_ROOT_CONDA_ENV=dcs-minimal
+ENV DATABRICKS_ROOT_CONDA_ENV=dcs-minimal
