@@ -7,6 +7,7 @@ and: https://github.com/databricks/containers
 ## Docker Layer Architecture
 
 Foundation: minimal_container
+            conda_python
 
 ## Basic instructions 
 
