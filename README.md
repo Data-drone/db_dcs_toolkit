@@ -4,6 +4,10 @@ A set of useful primatives for making more advanced DCS containers:
 See: https://docs.databricks.com/clusters/custom-containers.html
 and: https://github.com/databricks/containers
 
+## Docker Layer Architecture
+
+Foundation: minimal_container
+
 ## Basic instructions 
 
 ```{bash}
@@ -29,5 +33,6 @@ Known Missing Features:
 Ganglia
 R
 ssh
+Repos feature in DB
 
 still need to add back some more libs for deeplearning etc
