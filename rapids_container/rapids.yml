@@ -1,7 +1,11 @@
-name: base_env
+name: dcs-minimal
 channels:
   - rapidsai
   - nvidia
   - conda-forge
 dependencies:
-- rapids=22.02
+  - python=3.8
+  - cudatoolkit=11.5
+  - rapids=22.04
+  - pip:
+    - pyarrow==1.0.1
