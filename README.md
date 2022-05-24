@@ -8,6 +8,10 @@ and: https://github.com/databricks/containers
 
 Foundation: minimal_container
             conda_python
+            Standard
+            R
+Rapids:     Rapids Container
+Monitoring: Ganglia
 
 ## Basic instructions 
 
@@ -16,6 +20,8 @@ Foundation: minimal_container
 make build-base
 
 make build-rapids
+
+make build-ganglia
 
 make push-rapids
 
@@ -27,13 +33,14 @@ make push-rapids
 
 `build-rapids` builds a function RAPID.ai Python container with the current (Feb 2021) release of RAPIDs.ai
 
-This has been lightly tested on DBR 10.3.
+This has been lightly tested on DBR 10.3 and DBR 10.4 LTS.
 
 Known Missing Features:
 
-Ganglia
-R
+R - has issues - related to not triggering init script?
 ssh
 Repos feature in DB
+Web Terminal
 
-still need to add back some more libs for deeplearning etc
+Still need to add back some more libs for deeplearning etc
+- need to check if it is in the Rapids installs

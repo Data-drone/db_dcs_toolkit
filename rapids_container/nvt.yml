@@ -1,9 +1,10 @@
-name: dcs-rapids
+name: dcs-nvt
 channels:
   - rapidsai
   - nvidia
+  - numba
   - conda-forge
 dependencies:
   - python=3.8
   - cudatoolkit=11.5
-  - rapids=22.04
+  - nvtabular=1.0.0
